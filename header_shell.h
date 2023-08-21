@@ -17,5 +17,4 @@ extern char **environ;
 /*protoypes*/
 int main(int ac, char **av, char **env);
 void execute_command(char *command, char **env);
-ssize_t read_command(char *buffer, size_t bufsize);
 #endif
