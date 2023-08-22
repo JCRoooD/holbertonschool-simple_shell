@@ -1,0 +1,37 @@
+.TH SIMPLE_SHELL "Agosto 25,2023" Linux "USER MANUALS"
+.SH NAME
+Simple Shell - command language interpreter
+.SH SYPNOSIS
+#include "header_shell.h"
+./hsh.
+
+.SH DESCRIPTION
+Simple shell is a limited implementation of commands and functionality
+
+.SS PATH
+It does not perform any direct action, it allows the execution of commands without specifying the full path of the executable.
+
+.SS INVOCATION
+.IP Interactive
+The simple shell can be called by typing ./hsh.
+
+.IP Non-interactive
+The plain shell can also be called via a pipe (eg echo "/bin/ls" | ./hsh).
+
+.SS Command Execution
+After breaking a command into words, if it results in a single command and an optional list of arguments, the following actions are taken.
+
+/bin/ls
+
+.IP [[flags]...[arguments]]
+Counts the files in the current directory according to the flags provided by the user.
+
+.SS SHELL BUILTIN COMMANDS
+ exit -exits the plain shell and returns to the user's original shell
+ env - prints environmental variables
+
+.SH BUGS
+NO known bugs.
+
+.SH AUTHOR
+Juan Rodriguez & Neischaly Ruidiaz
