@@ -1,4 +1,4 @@
-#include "header_shell.c"
+#include "header_shell.h"
 #define BUFFER_SIZE 1024
 
 int main(void) {
