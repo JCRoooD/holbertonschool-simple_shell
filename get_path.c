@@ -21,8 +21,9 @@ char *extract_value(const char *entry)
  */
 char *get_path(char **env)
 {
+	int i;
     char *path_variable;
-    for (int i = 0; env[i] != NULL; i++)
+    for (i = 0; env[i] != NULL; i++)
     {
         if (strncmp(env[i], "PATH=", 5) == 0)
         {
