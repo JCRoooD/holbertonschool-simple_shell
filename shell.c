@@ -3,8 +3,7 @@
  * main - our shell program
  * @ac: argument counter
  * @av: argument vector
- * @env: environment variable
- * Return: Always 0
+   * Return: Always 0
  */
 int main(int ac, char **av, char **env)
 {
@@ -12,6 +11,7 @@ int main(int ac, char **av, char **env)
 	size_t bufsize = 0;
 	ssize_t characters_read;
 	int is_interactive = isatty(STDIN_FILENO);
+	char *path_variable = get_path(env);
 
 	while (1)
 	{
@@ -36,8 +36,12 @@ int main(int ac, char **av, char **env)
 
 		if (buffer[0] == '\0' || buffer[0] == ' ')
 			continue;
-
 		execute_command(buffer, env);
+	}
+	if (path_variable)
+	{
+		printf("the PATH value: %s\n", path_variable);
+		free(path_variable);
 	}
 	free(buffer);
 	return (0);
