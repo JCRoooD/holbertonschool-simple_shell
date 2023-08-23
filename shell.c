@@ -40,7 +40,6 @@ int main(int ac, char **av, char **env)
 	}
 	if (path_variable)
 	{
-		printf("the PATH value: %s\n", path_variable);
 		free(path_variable);
 	}
 	free(buffer);
