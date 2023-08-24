@@ -1,5 +1,10 @@
 #include "header_shell.h"
 
+/**
+ * main - Ejecuta un comando que falla y sale del programa sin ningún parámetro adicional
+ *
+ * Return: 0 si se ejecuta correctamente
+ */
 
 int main() {
     pid_t pid = fork();
