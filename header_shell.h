@@ -22,6 +22,7 @@ char *get_path(char **env);
 void handlePath(char* command, char* path);
 void removeLeadingTrailingSpaces(char* str);
 void removeEmptyLines(char* str);
+void executeCommand(char** arguments);
 
 
 #endif
