@@ -20,4 +20,5 @@ void execute_command(char *command, char **env);
 char *extract_value(const char *entry);
 char *get_path(char **env);
 void handlePath(char* command, char* path);
+void removeLeadingTrailingSpaces(char* str);
 #endif
