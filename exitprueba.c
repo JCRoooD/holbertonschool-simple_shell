@@ -10,7 +10,7 @@ int main() {
     pid_t pid = fork();
     if (pid == 0) {
         // Child process
-        char* command = "comando_que_falla"; // Reemplaza esto con el comando que deseas ejecutar y que sabes que fallará
+        char* command = "comando_que_falla";
         execlp(command, command, NULL);
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
