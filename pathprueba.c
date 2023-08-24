@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stddef.h>
-#include <ctype.h>
+
 
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGUMENTS 10
