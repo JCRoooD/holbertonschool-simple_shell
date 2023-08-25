@@ -3,7 +3,8 @@
  * main - our shell program
  * @ac: argument counter
  * @av: argument vector
-   * Return: Always 0
+ * @env: environment
+ * Return: Always 0
  */
 int main(int ac, char **av, char **env)
 {
@@ -11,37 +12,60 @@ int main(int ac, char **av, char **env)
 	size_t bufsize = 0;
 	ssize_t characters_read;
 	int is_interactive = isatty(STDIN_FILENO);
-	char *path_variable = get_path(env);
+	char *trim;
 
 	while (1)
 	{
-		(void)ac;
-		(void)av;
-
 		if (is_interactive)
 		{
 			printf("$ "); /*show prompt*/
 		}
+		(void)ac;
+		(void)av;
+
 		characters_read = getline(&buffer, &bufsize, stdin);
+
 		if (characters_read == -1)
 			break;
 
-		buffer[strcspn(buffer, "\n")] = '\0';
+		trim = trim_digits(buffer);
 
-		if (strcmp(buffer, "exit") == 0)
+		if (strcmp(trim, "exit") == 0)
 			break;
 
-		if (isspace((unsigned char)buffer[0]))
-			continue;
-
-		if (buffer[0] == '\0' || buffer[0] == ' ')
+		if (trim[0] == '\0')
 			continue;
 		execute_command(buffer, env);
+
+		free(buffer);
+		buffer = NULL;
 	}
-	if (path_variable)
-	{
-		free(path_variable);
-	}
-	free(buffer);
+
+	if (buffer != NULL)
+		free(buffer);
+
 	return (0);
+}
+
+/**
+ * trim_digits - Remove leading and trailing digits from a string
+ * @str: The string to trim
+ * Return: A pointer to the trimmed string
+ */
+char *trim_digits(char *str)
+{
+	char *beg = str;					/* Pointer to the start of the string */
+	char *last = str + strlen(str) - 1; /* Pointer to the end of the string */
+
+	while (isspace((unsigned char)*beg))
+		beg++;
+
+	/* Remove trailing whitespace */
+	while (last > beg && isspace((unsigned char)*last))
+		last--;
+
+	/* Null-terminate the trimmed string */
+	last[1] = '\0';
+
+	return (beg); /* Return the trimmed string */
 }
