@@ -7,31 +7,31 @@
 
 void execute_command(char *command, char **env)
 {
-    pid_t pid;
-    char *token, **tokens = NULL;
-    int arg_count = 0;
+pid_t pid;
+char *token, **tokens = NULL;
+int arg_count = 0;
 
-    token = strtok(command, " \n");
-    while (token != NULL)
-    {
-        tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
-        tokens[arg_count++] = token;
-        token = strtok(NULL, " \n");
-        tokens[arg_count] = NULL;
-    }
+token = strtok(command, " \n");
+while (token != NULL)
+{
+    tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
+    tokens[arg_count++] = token;
+    token = strtok(NULL, " \n");
+    tokens[arg_count] = NULL;
+}
 
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("fork");
-        return;
-    }
-    if (pid == 0)
-    {
-        execve(tokens[0], tokens, env);
-        perror("Error ");
-        exit(EXIT_FAILURE);
-    }
+pid = fork();
+if (pid == -1)
+{
+    perror("fork");
+    return;
+}
+if (pid == 0)
+{
+    execve(tokens[0], tokens, env);
+    perror("Error ");
+    exit(EXIT_FAILURE);
+}
     else
     {
         wait(NULL);
