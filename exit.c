@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "header_shell.h"
 
 int main() {
     // No se imprime nada en la salida estándar (stdout)
