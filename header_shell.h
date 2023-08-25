@@ -9,21 +9,15 @@
 #include <unistd.h>
 #include <stddef.h>
 #include <ctype.h>
-#include <fcntl.h>
-#include <stdarg.h>
-#include <dirent.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <stdbool.h>
 /*environment variable*/
 extern char **environ;
 
-/*buffer*/
-#define BUFFER_SIZE 1024
 /*protoypes*/
 int main(int ac, char **av, char **env);
 void execute_command(char *command, char **env);
-char *extract_value(const char *entry);
-char *get_path(char **env);
-
+void free_token(char **tokens, int arg_count);
+void free_path(char **path, int num_path);
+void child_process(char **tokens, char **env);
+char *trim_digits(char *str);
+char *command_path(char *command_line);
 #endif
