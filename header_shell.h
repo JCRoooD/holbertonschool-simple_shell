@@ -20,4 +20,5 @@ void free_path(char **path, int num_path);
 void child_process(char **tokens, char **env);
 char **get_path(void);
 char *trim_digits(char *str);
+char *command_path(char *command_line);
 #endif
