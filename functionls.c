@@ -1,49 +1,49 @@
-#include "header_shell.h"
 
-/**
- * execute_command - Ejecuta el comando ingresado por el usuario
- * @command: Comando ingresado por el usuario
- * @env: Variables de entorno
- */
-void execute_command(char *command, char **env)
+
+int main()
 {
-	pid_t pid;
-	char **tokens = NULL;
-	int arg_count = 0;
+    int pipefd[2];
+    pid_t pid;
 
-	char *token = strtok(command, " \n");
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
 
-	if (token == NULL)
-		return;
-	while (token != NULL)
-	{
-		tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
-		if (tokens == NULL)
-		{
-			perror("realloc");
-			return;
-		}
-		tokens[arg_count] = token;
-		arg_count++;
-		token = strtok(NULL, " \n");
-		tokens[arg_count] = NULL;
-	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		return;
-	}
-	if (pid == 0)
-	{
-		execve(tokens[0], tokens, env);
-		perror("Error ");
-		/* execve devuelve si ocurre un error */
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		wait(NULL);
-		free(tokens);
-	}
+    pid = fork();
+    if (pid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0) {
+        // Proceso hijo
+        close(pipefd[1]);  // Cerramos el extremo de escritura del pipe
+
+        // Redirigimos la entrada estándar al extremo de lectura del pipe
+        if (dup2(pipefd[0], STDIN_FILENO) == -1) {
+            perror("dup2");
+            exit(EXIT_FAILURE);
+        }
+
+        // Ejecutamos el comando /bin/ls
+        if (execl("/bin/ls", "ls", (char *)NULL) == -1) {
+            perror("execl");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        // Proceso padre
+        close(pipefd[0]);  // Cerramos el extremo de lectura del pipe
+
+        // Escribimos el comando en el extremo de escritura del pipe
+        if (write(pipefd[1], "/bin/ls", sizeof("/bin/ls")) == -1) {
+            perror("write");
+            exit(EXIT_FAILURE);
+        }
+
+        // Esperamos a que el proceso hijo termine
+        wait(NULL);
+    }
+
+    return 0;
 }
