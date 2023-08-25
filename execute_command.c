@@ -1,9 +1,9 @@
 #include "header_shell.h"
-**
- * execute_command - Ejecuta el comando ingresado por el usuario
- * @command: Comando ingresado por el usuario
- * @env: Variables de entorno
- */
+**/
+* execute_command - Execute the command entered by the user
+* @command: Command entered by the user
+* @env: Environment variables
+*/
 void execute_command(char *command, char **env)
 {
     char *token, **tokens = NULL;
