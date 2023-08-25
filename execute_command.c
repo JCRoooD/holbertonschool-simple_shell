@@ -1,5 +1,6 @@
 #include "header_shell.h"
-/* execute_command - Ejecuta el comando ingresado por el usuario
+/**
+ * execute_command - Ejecuta el comando ingresado por el usuario
  * @command: Comando ingresado por el usuario
  * @env: Variables de entorno
  */
@@ -10,6 +11,7 @@ void execute_command(char *command, char **env)
 	int arg_count = 0;
 
 	char *token = strtok(command, " \n");
+
 	if (token == NULL)
 		return;
 	while (token != NULL)
