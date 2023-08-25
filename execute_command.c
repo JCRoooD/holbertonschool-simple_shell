@@ -23,12 +23,13 @@ tokens[arg_count] = NULL;
 
 pid = fork();
 
-if (pid == -1)
+    if (pid == -1)
 {
-    perror("fork");
-    return;
+perror("fork");
+return;
 }
-if (pid == 0)
+
+    if (pid == 0)
 {
     execve(tokens[0], tokens, env);
     perror("Error ");
