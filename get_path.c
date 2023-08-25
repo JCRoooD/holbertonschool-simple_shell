@@ -7,9 +7,10 @@
 char *extract_value(const char *entry)
 {
 	const char *equals = strchr(entry, '=');
+	
 	if (equals)
 	{
-		return strdup(equals + 1);
+		return (strdup(equals + 1));
 	}
 	return (NULL);
 }
