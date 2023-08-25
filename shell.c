@@ -32,7 +32,7 @@ int main(int ac, char **av, char **env)
 
 		if (strcmp(buffer, "exit") == 0)
 			break;
-		
+
 		if (isspace((unsigned char)buffer[0]))
 			continue;
 
