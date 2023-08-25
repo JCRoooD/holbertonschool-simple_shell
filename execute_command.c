@@ -13,8 +13,8 @@ int arg_count = 0;
 
 token = strtok(command, " \n");
 
-    while (token != NULL)
-    {
+while (token != NULL)
+{
 tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
 tokens[arg_count++] = token;
 token = strtok(NULL, " \n");
@@ -22,6 +22,7 @@ tokens[arg_count] = NULL;
 }
 
 pid = fork();
+
 if (pid == -1)
 {
     perror("fork");
