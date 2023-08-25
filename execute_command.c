@@ -11,7 +11,7 @@ void execute_command(char *command, char **env)
 	int arg_count = 0;
 
 	char *token = strtok(command, " \n");
-	
+
 	if (token == NULL)
 		return;
 	while (token != NULL)
