@@ -31,7 +31,7 @@ for (i = 0; env[i] != NULL; i++)
 	{
 	path_variable = extract_value(env[i]);
 	break;
-        }
-    }
+	}
+}
 	return (path_variable);
 }
