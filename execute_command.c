@@ -4,47 +4,37 @@
  * @command: Comando ingresado por el usuario
  * @env: Variables de entorno
  */
+
 void execute_command(char *command, char **env)
 {
-	pid_t pid;
-	char **tokens = NULL;
-	int arg_count = 0;
+    pid_t pid;
+    char *token, **tokens = NULL;
+    int arg_count = 0;
 
-	char *token = strtok(command, " \n");
+    token = strtok(command, " \n");
+    while (token != NULL)
+    {
+        tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
+        tokens[arg_count++] = token;
+        token = strtok(NULL, " \n");
+        tokens[arg_count] = NULL;
+    }
 
-	if (token == NULL)
-		return;
-	while (token != NULL)
-	{
-		tokens = realloc(tokens, sizeof(char *) * (arg_count + 1));
-		if (tokens == NULL)
-		{
-			perror("realloc");
-			return;
-		}
-		tokens[arg_count] = token;
-		arg_count++;
-		token = strtok(NULL, " \n");
-		tokens[arg_count] = NULL;
-	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		return;
-	}
-	if (pid == 0)
-	{
-
-		execve(tokens[0], tokens, env);
-		perror("Error ");
-		/* execve devuelve si ocurre un error */
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		/* Proceso padre */
-		wait(NULL); /* Esperar a que el proceso hijo termine */
-		free(tokens);
-	}
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        return;
+    }
+    if (pid == 0)
+    {
+        execve(tokens[0], tokens, env);
+        perror("Error ");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        wait(NULL);
+        free(tokens);
+    }
 }
