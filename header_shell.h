@@ -25,6 +25,5 @@ int main(int ac, char **av, char **env);
 void execute_command(char *command, char **env);
 char *extract_value(const char *entry);
 char *get_path(char **env);
-int main(int argc, char *argv[], char *envp[]);
 
 #endif
