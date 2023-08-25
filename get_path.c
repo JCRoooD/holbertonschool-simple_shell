@@ -24,13 +24,13 @@ char *get_path(char **env)
 {
 	int i;
 char *path_variable;
-    
+
 for (i = 0; env[i] != NULL; i++)
 	{
-        if (strncmp(env[i], "PATH=", 5) == 0)
-        {
-            path_variable = extract_value(env[i]);
-            break;
+	if (strncmp(env[i], "PATH=", 5) == 0)
+	{
+	path_variable = extract_value(env[i]);
+	break;
         }
     }
 	return (path_variable);
