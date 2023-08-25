@@ -1,7 +1,7 @@
 #include "header_shell.h"
 /**
  * extract_value - function to extract the value of an environment variable
- * @entry: environment entry 
+ * @entry: environment entry
  * Return: NULL
  */
 char *extract_value(const char *entry)
