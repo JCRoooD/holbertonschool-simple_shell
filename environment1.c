@@ -1,3 +1,4 @@
+#include "header_shell.h"
 /**
  * main - Remueve todas las variables de entorno excepto una y ejecuta env
  * @argc: Número de argumentos
