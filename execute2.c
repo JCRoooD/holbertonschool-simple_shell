@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "simple.h"
+#include "header_shell.h"
 /**
  * execute_command - execute a command
  * @command: command to be executed
