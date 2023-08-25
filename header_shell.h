@@ -9,6 +9,12 @@
 #include <unistd.h>
 #include <stddef.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <stdarg.h>
+#include <dirent.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <stdbool.h>
 /*environment variable*/
 extern char **environ;
 
